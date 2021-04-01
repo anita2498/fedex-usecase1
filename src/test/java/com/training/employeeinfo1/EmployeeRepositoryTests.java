@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -53,13 +54,16 @@ public class EmployeeRepositoryTests {
 	 * "Elon", "Musk", "dev", "abcd", new Date(2000, 12, 11)); }
 	 */
 	
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings({ "deprecation", "null" })
 	@Test
 	@Transactional
 	@Order(1)
 	public void testSaveNewEmployee() {
-		employee = new Employee(1, "Elon", "Musk", "dev", "abcd", new Date(2000, 12, 11));
+		//Timestamp t = Timestamp.valueOf(System.currentTimeMillis());
+		employee = new Employee(1, "Elon", "Musk", "dev", "abcd", new Date(2000, 12, 11) );
 		service.addEmployee(employee);
+		employee.setDateCreated(service.getEmployee(1).get().getDateCreated());
+		employee.setLastModified(service.getEmployee(1).get().getLastModified());
 		assertEquals(employee, service.getEmployee(1).get());
 	}
 
@@ -67,35 +71,38 @@ public class EmployeeRepositoryTests {
 	 
 	 
 
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings({ "deprecation", "null" })
 	@Test
 	@Transactional
 	@Order(2)
 	public void testUpdateEmployee() {
+		//Timestamp t = Timestamp.valueOf("2020-03-02 12:34:08");
 		employee = new Employee(2, "Elon", "Musk", "dev", "abcd", new Date(2000, 12, 11));
 		service.addEmployee(employee);
 		System.out.println(service.getAllEmployees());
 		employee.setLastname("Bezos");
-
+		//System.out.println(System.nanoTime());
 		int id = 2;
 		service.updateEmployee(employee, id);
 		System.out.println(employee);
+		System.out.println("   /////// " + service.getEmployee(id).get());
 		assertEquals(employee, service.getEmployee(id).get());
 	}
 	
 	
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings({ "deprecation", "null" })
 	@Test
 	@Transactional
 	@Order(3)
 	public void testGetEmployee() {
 		employee = new Employee(3, "Elon", "Musk", "dev", "abcd", new Date(2000, 12, 11));
 		service.addEmployee(employee);
-		
+		employee.setDateCreated(service.getEmployee(3).get().getDateCreated());
+		employee.setLastModified(service.getEmployee(3).get().getLastModified());
 		assertEquals(employee, service.getEmployee(3).get());
 	}
 	
-	@SuppressWarnings("deprecation")
+	@SuppressWarnings({ "deprecation", "null" })
 	@Test
 	@Transactional
 	@Order(4)
