@@ -54,7 +54,7 @@ public class EmployeeRepositoryTests {
 	 * "Elon", "Musk", "dev", "abcd", new Date(2000, 12, 11)); }
 	 */
 	
-	@SuppressWarnings({ "deprecation", "null" })
+	@SuppressWarnings({ "deprecation" })
 	@Test
 	@Transactional
 	@Order(1)
@@ -71,7 +71,7 @@ public class EmployeeRepositoryTests {
 	 
 	 
 
-	@SuppressWarnings({ "deprecation", "null" })
+	@SuppressWarnings({ "deprecation"})
 	@Test
 	@Transactional
 	@Order(2)
@@ -85,12 +85,12 @@ public class EmployeeRepositoryTests {
 		int id = 2;
 		service.updateEmployee(employee, id);
 		System.out.println(employee);
-		System.out.println("   /////// " + service.getEmployee(id).get());
+		//System.out.println("   /////// " + service.getEmployee(id).get());
 		assertEquals(employee, service.getEmployee(id).get());
 	}
 	
 	
-	@SuppressWarnings({ "deprecation", "null" })
+	@SuppressWarnings({ "deprecation" })
 	@Test
 	@Transactional
 	@Order(3)
@@ -102,7 +102,7 @@ public class EmployeeRepositoryTests {
 		assertEquals(employee, service.getEmployee(3).get());
 	}
 	
-	@SuppressWarnings({ "deprecation", "null" })
+	@SuppressWarnings({ "deprecation" })
 	@Test
 	@Transactional
 	@Order(4)

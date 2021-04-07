@@ -1,10 +1,15 @@
 package com.training.employeeinfo1.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -47,11 +52,14 @@ public class EmployeeController {
 		
 	}
 	
-	//@GetMapping("/error")
-	//public String errorPage(){
-	//return "An unexpected error has occured";
-	//return "/employees" ;
-	//}
+	@ExceptionHandler
+    void handleIllegalArgumentException(
+                      IllegalArgumentException e,
+                      HttpServletResponse response) throws IOException {
+ 
+        response.sendError(HttpStatus.BAD_REQUEST.value());
+ 
+    }
 }
 
 
